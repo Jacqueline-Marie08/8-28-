@@ -67,6 +67,30 @@ body{
 <div class="main">
 
   <div id="dashboard" class="card">
+    <h3>GPA Calculator</h3>
+
+<input
+  id="gradePoints"
+  type="number"
+  step="0.1"
+  placeholder="Grade Points (4.0, 3.7, 3.3...)"
+>
+
+<input
+  id="credits"
+  type="number"
+  placeholder="Credits"
+>
+
+<button onclick="addGrade()">
+  Add Grade
+</button>
+
+<div id="gradeList"></div>
+
+<h2 id="gpaDisplay">
+  GPA: 0.00
+</h2>
     <h1>Dashboard</h1>
     <p>Welcome to your planner.</p>
   </div>
@@ -505,7 +529,106 @@ function deleteHabit(index) {
   );
 
   loadHabits();
+function loadGrades() {
 
+  const grades =
+    JSON.parse(localStorage.getItem("grades")) || [];
+
+  const list =
+    document.getElementById("gradeList");
+
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  let totalPoints = 0;
+  let totalCredits = 0;
+
+  grades.forEach((grade, index) => {
+
+    totalPoints +=
+      grade.points * grade.credits;
+
+    totalCredits +=
+      grade.credits;
+
+    list.innerHTML += `
+      <div class="card">
+        ${grade.points} GPA Points
+        (${grade.credits} Credits)
+
+        <br><br>
+
+        <button onclick="deleteGrade(${index})">
+          Delete
+        </button>
+      </div>
+    `;
+
+  });
+
+  const gpa =
+    totalCredits > 0
+      ? totalPoints / totalCredits
+      : 0;
+
+  document.getElementById(
+    "gpaDisplay"
+  ).innerText =
+    "GPA: " + gpa.toFixed(2);
+
+}
+
+function addGrade() {
+
+  const points =
+    parseFloat(
+      document.getElementById(
+        "gradePoints"
+      ).value
+    );
+
+  const credits =
+    parseFloat(
+      document.getElementById(
+        "credits"
+      ).value
+    );
+
+  if (!points || !credits) return;
+
+  const grades =
+    JSON.parse(localStorage.getItem("grades")) || [];
+
+  grades.push({
+    points,
+    credits
+  });
+
+  localStorage.setItem(
+    "grades",
+    JSON.stringify(grades)
+  );
+
+  loadGrades();
+
+}
+
+function deleteGrade(index) {
+
+  const grades =
+    JSON.parse(localStorage.getItem("grades")) || [];
+
+  grades.splice(index, 1);
+
+  localStorage.setItem(
+    "grades",
+    JSON.stringify(grades)
+  );
+
+  loadGrades();
+
+}
 }
 window.onload = function() {
   loadAssignments();
