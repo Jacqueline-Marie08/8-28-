@@ -140,9 +140,21 @@ body{
 
 </div>
 
-  <div id="habits" class="card">
-    <h2>Habits</h2>
-  </div>
+ <div id="habits" class="card">
+  <h2>Habits</h2>
+
+  <input
+    id="habitName"
+    placeholder="New Habit"
+  >
+
+  <button onclick="addHabit()">
+    Add Habit
+  </button>
+
+  <div id="habitList"></div>
+
+</div>
 
 </div>
 <script>
@@ -399,11 +411,107 @@ function deleteNote(index) {
   loadNotes();
 
 }
+function loadHabits() {
 
+  const habits =
+    JSON.parse(localStorage.getItem("habits")) || [];
+
+  const list =
+    document.getElementById("habitList");
+
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  habits.forEach((habit, index) => {
+
+    list.innerHTML += `
+      <div class="card">
+
+        <input
+          type="checkbox"
+          ${habit.done ? "checked" : ""}
+          onchange="toggleHabit(${index})"
+        >
+
+        ${habit.name}
+
+        <br><br>
+
+        <button onclick="deleteHabit(${index})">
+          Delete
+        </button>
+
+      </div>
+    `;
+
+  });
+
+}
+
+function addHabit() {
+
+  const name =
+    document.getElementById("habitName").value;
+
+  if (!name) return;
+
+  const habits =
+    JSON.parse(localStorage.getItem("habits")) || [];
+
+  habits.push({
+    name: name,
+    done: false
+  });
+
+  localStorage.setItem(
+    "habits",
+    JSON.stringify(habits)
+  );
+
+  document.getElementById("habitName").value = "";
+
+  loadHabits();
+
+}
+
+function toggleHabit(index) {
+
+  const habits =
+    JSON.parse(localStorage.getItem("habits")) || [];
+
+  habits[index].done =
+    !habits[index].done;
+
+  localStorage.setItem(
+    "habits",
+    JSON.stringify(habits)
+  );
+
+  loadHabits();
+
+}
+
+function deleteHabit(index) {
+
+  const habits =
+    JSON.parse(localStorage.getItem("habits")) || [];
+
+  habits.splice(index, 1);
+
+  localStorage.setItem(
+    "habits",
+    JSON.stringify(habits)
+  );
+
+  loadHabits();
+
+}
 window.onload = function() {
   loadAssignments();
   loadTests();
   loadNotes();
+  loadHabits();
 };
 
 </script>
