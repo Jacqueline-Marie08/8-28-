@@ -129,15 +129,78 @@ body{
 </div>
 <script>
 function loadTests() {
-  ...
+
+  const tests =
+    JSON.parse(localStorage.getItem("tests")) || [];
+
+  const list =
+    document.getElementById("testList");
+
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  tests.forEach((test, index) => {
+
+    list.innerHTML += `
+      <div class="card">
+        <strong>${test.name}</strong><br>
+        Test Date: ${test.date}<br>
+
+        <button onclick="deleteTest(${index})">
+          Delete
+        </button>
+      </div>
+    `;
+
+  });
+
 }
 
 function addTest() {
-  ...
+
+  const name =
+    document.getElementById("testName").value;
+
+  const date =
+    document.getElementById("testDate").value;
+
+  if (!name) return;
+
+  const tests =
+    JSON.parse(localStorage.getItem("tests")) || [];
+
+  tests.push({
+    name: name,
+    date: date
+  });
+
+  localStorage.setItem(
+    "tests",
+    JSON.stringify(tests)
+  );
+
+  document.getElementById("testName").value = "";
+  document.getElementById("testDate").value = "";
+
+  loadTests();
+
 }
 
 function deleteTest(index) {
-  ...
+
+  const tests =
+    JSON.parse(localStorage.getItem("tests")) || [];
+
+  tests.splice(index, 1);
+
+  localStorage.setItem(
+    "tests",
+    JSON.stringify(tests)
+  );
+
+  loadTests();
+
 }
 function loadAssignments() {
 
