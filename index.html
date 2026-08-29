@@ -119,8 +119,26 @@ body{
 </div>
 
   <div id="notes" class="card">
-    <h2>Notes</h2>
-  </div>
+  <h2>Notes</h2>
+
+  <input
+    id="noteTitle"
+    placeholder="Class Name"
+  >
+
+  <textarea
+    id="noteText"
+    placeholder="Type notes here..."
+    style="width:100%;height:200px;"
+  ></textarea>
+
+  <button onclick="saveNote()">
+    Save Note
+  </button>
+
+  <div id="notesList"></div>
+
+</div>
 
   <div id="habits" class="card">
     <h2>Habits</h2>
@@ -285,7 +303,41 @@ function deleteAssignment(index) {
   loadAssignments();
 
 }
+function deleteAssignment(index) {
 
+  const assignments =
+    JSON.parse(localStorage.getItem("assignments")) || [];
+
+  assignments.splice(index, 1);
+
+  localStorage.setItem(
+    "assignments",
+    JSON.stringify(assignments)
+  );
+
+  loadAssignments();
+
+}
+
+/* NOTES FUNCTIONS GO HERE */
+
+function loadNotes() {
+  ...
+}
+
+function saveNote() {
+  ...
+}
+
+function deleteNote(index) {
+  ...
+}
+
+window.onload = function() {
+  loadAssignments();
+  loadTests();
+  loadNotes();
+};
 window.onload = function() {
   loadAssignments();
   loadTests();
