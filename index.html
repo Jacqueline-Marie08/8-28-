@@ -104,8 +104,19 @@ body{
   </div>
 
   <div id="tests" class="card">
-    <h2>Tests</h2>
-  </div>
+  <h2>Tests</h2>
+
+  <input id="testName" placeholder="Test Name">
+
+  <input id="testDate" type="date">
+
+  <button onclick="addTest()">
+    Add Test
+  </button>
+
+  <div id="testList"></div>
+
+</div>
 
   <div id="notes" class="card">
     <h2>Notes</h2>
@@ -117,7 +128,17 @@ body{
 
 </div>
 <script>
+function loadTests() {
+  ...
+}
 
+function addTest() {
+  ...
+}
+
+function deleteTest(index) {
+  ...
+}
 function loadAssignments() {
 
   const assignments =
@@ -204,6 +225,7 @@ function deleteAssignment(index) {
 
 window.onload = function() {
   loadAssignments();
+  loadTests();
 };
 
 </script>
