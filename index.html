@@ -71,9 +71,26 @@ body{
     <p>Welcome to your planner.</p>
   </div>
 
-  <div id="assignments" class="card">
-    <h2>Assignments</h2>
-  </div>
+ <div id="assignments" class="card">
+  <h2>Assignments</h2>
+
+  <input id="assignmentName" placeholder="Assignment Name">
+
+  <input id="assignmentDate" type="date">
+
+  <select id="assignmentPriority">
+    <option>Low</option>
+    <option>Medium</option>
+    <option>High</option>
+  </select>
+
+  <button onclick="addAssignment()">
+    Add Assignment
+  </button>
+
+  <div id="assignmentList"></div>
+
+</div>
 
   <div id="classes" class="card">
     <h2>Classes</h2>
@@ -99,6 +116,96 @@ body{
   </div>
 
 </div>
+<script>
 
+function loadAssignments() {
+
+  const assignments =
+    JSON.parse(
+      localStorage.getItem("assignments")
+    ) || [];
+
+  const list =
+    document.getElementById("assignmentList");
+
+  list.innerHTML = "";
+
+  assignments.forEach((item, index) => {
+
+    list.innerHTML += `
+      <div class="card">
+        <strong>${item.name}</strong><br>
+        Due: ${item.date}<br>
+        Priority: ${item.priority}<br>
+
+        <button onclick="deleteAssignment(${index})">
+          Delete
+        </button>
+      </div>
+    `;
+
+  });
+
+}
+
+function addAssignment() {
+
+  const name =
+    document.getElementById("assignmentName").value;
+
+  const date =
+    document.getElementById("assignmentDate").value;
+
+  const priority =
+    document.getElementById("assignmentPriority").value;
+
+  if (!name) return;
+
+  const assignments =
+    JSON.parse(
+      localStorage.getItem("assignments")
+    ) || [];
+
+  assignments.push({
+    name,
+    date,
+    priority
+  });
+
+  localStorage.setItem(
+    "assignments",
+    JSON.stringify(assignments)
+  );
+
+  document.getElementById("assignmentName").value = "";
+  document.getElementById("assignmentDate").value = "";
+
+  loadAssignments();
+
+}
+
+function deleteAssignment(index) {
+
+  const assignments =
+    JSON.parse(
+      localStorage.getItem("assignments")
+    ) || [];
+
+  assignments.splice(index, 1);
+
+  localStorage.setItem(
+    "assignments",
+    JSON.stringify(assignments)
+  );
+
+  loadAssignments();
+
+}
+
+window.onload = function() {
+  loadAssignments();
+};
+
+</script>
 </body>
 </html>
