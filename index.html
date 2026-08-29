@@ -322,25 +322,88 @@ function deleteAssignment(index) {
 /* NOTES FUNCTIONS GO HERE */
 
 function loadNotes() {
-  ...
+
+  const notes =
+    JSON.parse(localStorage.getItem("notes")) || [];
+
+  const list =
+    document.getElementById("notesList");
+
+  if (!list) return;
+
+  list.innerHTML = "";
+
+  notes.forEach((note, index) => {
+
+    list.innerHTML += `
+      <div class="card">
+        <strong>${note.title}</strong>
+        <br><br>
+
+        ${note.text}
+
+        <br><br>
+
+        <button onclick="deleteNote(${index})">
+          Delete
+        </button>
+      </div>
+    `;
+
+  });
+
 }
 
 function saveNote() {
-  ...
+
+  const title =
+    document.getElementById("noteTitle").value;
+
+  const text =
+    document.getElementById("noteText").value;
+
+  if (!title) return;
+
+  const notes =
+    JSON.parse(localStorage.getItem("notes")) || [];
+
+  notes.push({
+    title: title,
+    text: text
+  });
+
+  localStorage.setItem(
+    "notes",
+    JSON.stringify(notes)
+  );
+
+  document.getElementById("noteTitle").value = "";
+  document.getElementById("noteText").value = "";
+
+  loadNotes();
+
 }
 
 function deleteNote(index) {
-  ...
+
+  const notes =
+    JSON.parse(localStorage.getItem("notes")) || [];
+
+  notes.splice(index, 1);
+
+  localStorage.setItem(
+    "notes",
+    JSON.stringify(notes)
+  );
+
+  loadNotes();
+
 }
 
 window.onload = function() {
   loadAssignments();
   loadTests();
   loadNotes();
-};
-window.onload = function() {
-  loadAssignments();
-  loadTests();
 };
 
 </script>
