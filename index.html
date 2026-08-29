@@ -531,8 +531,8 @@ function deleteHabit(index) {
   loadHabits();
 function loadGrades() {
 
-  const grades =
-    JSON.parse(localStorage.getItem("grades")) || [];
+ const grades =
+  JSON.parse(localStorage.getItem("grades")) || [];
 
   const list =
     document.getElementById("gradeList");
@@ -598,8 +598,7 @@ function addGrade() {
   if (!points || !credits) return;
 
   const grades =
-    JSON.parse(localStorage.getItem("grades")) || [];
-
+  JSON.parse(localStorage.getItem("grades")) || [];
   grades.push({
     points,
     credits
@@ -628,7 +627,6 @@ function deleteGrade(index) {
 
   loadGrades();
 
-}
 }
 window.onload = function() {
   loadAssignments();
