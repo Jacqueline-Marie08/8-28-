@@ -1,10 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Student Planner</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Planner</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f3eb;
+}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  width:220px;
+  height:100vh;
+  background:#a8c3a0;
+  padding:20px;
+  box-sizing:border-box;
+}
+
+.sidebar h2{
+  color:white;
+}
+
+.sidebar a{
+  display:block;
+  background:white;
+  color:#2f3e34;
+  text-decoration:none;
+  padding:12px;
+  margin:10px 0;
+  border-radius:10px;
+}
+
+.main{
+  margin-left:240px;
+  padding:30px;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:20px;
+}
+</style>
 </head>
+
 <body>
-  <h1>Student Planner</h1>
-  <p>If you can read this, GitHub and Vercel are working.</p>
+
+<div class="sidebar">
+  <h2>📚 Planner</h2>
+
+  <a href="#dashboard">Dashboard</a>
+  <a href="#assignments">Assignments</a>
+  <a href="#classes">Classes</a>
+  <a href="#tests">Tests</a>
+  <a href="#notes">Notes</a>
+  <a href="#habits">Habits</a>
+</div>
+
+<div class="main">
+
+  <div id="dashboard" class="card">
+    <h1>Dashboard</h1>
+    <p>Welcome to your planner.</p>
+  </div>
+
+  <div id="assignments" class="card">
+    <h2>Assignments</h2>
+  </div>
+
+  <div id="classes" class="card">
+    <h2>Classes</h2>
+
+    <ul>
+      <li>Business Law</li>
+      <li>HR Marketing</li>
+      <li>Marketing</li>
+      <li>Excel</li>
+    </ul>
+  </div>
+
+  <div id="tests" class="card">
+    <h2>Tests</h2>
+  </div>
+
+  <div id="notes" class="card">
+    <h2>Notes</h2>
+  </div>
+
+  <div id="habits" class="card">
+    <h2>Habits</h2>
+  </div>
+
+</div>
+
 </body>
 </html>
