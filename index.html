@@ -67,6 +67,32 @@ body{
 <div class="main">
 
   <div id="dashboard" class="card">
+    <h1>Student Dashboard</h1>
+
+<div class="card">
+  <h3>Total Assignments</h3>
+  <h2 id="assignmentCount">0</h2>
+</div>
+
+<div class="card">
+  <h3>Total Tests</h3>
+  <h2 id="testCount">0</h2>
+</div>
+
+<div class="card">
+  <h3>Total Notes</h3>
+  <h2 id="noteCount">0</h2>
+</div>
+
+<div class="card">
+  <h3>Total Habits</h3>
+  <h2 id="habitCount">0</h2>
+</div>
+
+<div class="card">
+  <h3>Current GPA</h3>
+  <h2 id="dashboardGPA">0.00</h2>
+</div>
     <h3>GPA Calculator</h3>
 
 <input
@@ -91,8 +117,7 @@ body{
 <h2 id="gpaDisplay">
   GPA: 0.00
 </h2>
-    <h1>Dashboard</h1>
-    <p>Welcome to your planner.</p>
+   
   </div>
 
  <div id="assignments" class="card">
@@ -629,12 +654,64 @@ function deleteGrade(index) {
   loadGrades();
 
 }
+  function updateDashboard() {
+
+  const assignments =
+    JSON.parse(localStorage.getItem("assignments")) || [];
+
+  const tests =
+    JSON.parse(localStorage.getItem("tests")) || [];
+
+  const notes =
+    JSON.parse(localStorage.getItem("notes")) || [];
+
+  const habits =
+    JSON.parse(localStorage.getItem("habits")) || [];
+
+  const grades =
+    JSON.parse(localStorage.getItem("grades")) || [];
+
+  document.getElementById("assignmentCount").innerText =
+    assignments.length;
+
+  document.getElementById("testCount").innerText =
+    tests.length;
+
+  document.getElementById("noteCount").innerText =
+    notes.length;
+
+  document.getElementById("habitCount").innerText =
+    habits.length;
+
+  let totalPoints = 0;
+  let totalCredits = 0;
+
+  grades.forEach(grade => {
+
+    totalPoints +=
+      grade.points * grade.credits;
+
+    totalCredits +=
+      grade.credits;
+
+  });
+
+  const gpa =
+    totalCredits > 0
+      ? totalPoints / totalCredits
+      : 0;
+
+  document.getElementById("dashboardGPA").innerText =
+    gpa.toFixed(2);
+
+}
 window.onload = function() {
   loadAssignments();
   loadTests();
   loadNotes();
   loadHabits();
   loadGrades();
+  updateDashboard();
 };
 
 </script>
