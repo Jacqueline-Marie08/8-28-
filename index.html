@@ -126,7 +126,12 @@ h3 {
 
   <div id="dashboard" class="card">
     <h1>Student Dashboard</h1>
-
+<div class="card">
+  <h3>📌 Due Soon</h3>
+  <div id="dueSoonList">
+    No upcoming items.
+  </div>
+</div>
 <div class="card">
   <h3>Total Assignments</h3>
   <h2 id="assignmentCount">0</h2>
@@ -770,6 +775,57 @@ function deleteGrade(index) {
     gpa.toFixed(2);
 
 }
+  function updateDueSoon() {
+
+  const assignments =
+    JSON.parse(localStorage.getItem("assignments")) || [];
+
+  const tests =
+    JSON.parse(localStorage.getItem("tests")) || [];
+
+  const dueSoon =
+    document.getElementById("dueSoonList");
+
+  if (!dueSoon) return;
+
+  dueSoon.innerHTML = "";
+
+  assignments.forEach(item => {
+
+    if (item.dueDate) {
+
+      dueSoon.innerHTML += `
+        <div>
+          📚 ${item.name} - ${item.dueDate}
+        </div>
+      `;
+
+    }
+
+  });
+
+  tests.forEach(test => {
+
+    if (test.date) {
+
+      dueSoon.innerHTML += `
+        <div>
+          📝 ${test.name} - ${test.date}
+        </div>
+      `;
+
+    }
+
+  });
+
+  if (dueSoon.innerHTML === "") {
+
+    dueSoon.innerHTML =
+      "No upcoming items.";
+
+  }
+
+}
 window.onload = function() {
   loadAssignments();
   loadTests();
@@ -777,6 +833,7 @@ window.onload = function() {
   loadHabits();
   loadGrades();
   updateDashboard();
+  updateDueSoon();
 };
 
 </script>
