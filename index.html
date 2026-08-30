@@ -404,21 +404,25 @@ function loadAssignments() {
 
   const list =
     document.getElementById("assignmentList");
-let priorityClass = "";
 
-if (item.priority === "High") {
-  priorityClass = "high-priority";
-}
-else if (item.priority === "Medium") {
-  priorityClass = "medium-priority";
-}
-else {
-  priorityClass = "low-priority";
-}
   list.innerHTML = "";
 
   assignments.forEach((item, index) => {
+assignments.forEach((item, index) => {
 
+  let priorityClass = "";
+
+  if (item.priority === "High") {
+    priorityClass = "high-priority";
+  }
+  else if (item.priority === "Medium") {
+    priorityClass = "medium-priority";
+  }
+  else {
+    priorityClass = "low-priority";
+  }
+
+  list.innerHTML += `
     list.innerHTML += `
       <div class="card ${priorityClass}">
         <strong>${item.name}</strong><br>
