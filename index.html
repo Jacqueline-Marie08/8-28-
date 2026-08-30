@@ -139,6 +139,23 @@ h3 {
 .low-priority {
   border-left: 6px solid green;
 }
+  #weeklyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.week-day {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.week-day textarea {
+  width: 100%;
+  height: 150px;
+  resize: vertical;
+}
 </style>
 </head>
 
@@ -154,6 +171,7 @@ h3 {
   <a href="#notes">Notes</a>
   <a href="#habits">Habits</a>
   <a href="#calendar">Calendar</a>
+  <a href="#weeklyPlanner">Weekly Planner</a>
 </div>
 
 <div class="main">
@@ -990,8 +1008,103 @@ if (
     `;
 
   }
+<div id="weeklyPlanner" class="card">
 
+  <h2>Weekly Planner</h2>
+
+  <div id="weeklyGrid">
+
+    <div class="week-day">
+      <h3>Monday</h3>
+      <textarea id="monday"></textarea>
+    </div>
+
+    <div class="week-day">
+      <h3>Tuesday</h3>
+      <textarea id="tuesday"></textarea>
+    </div>
+
+    <div class="week-day">
+      <h3>Wednesday</h3>
+      <textarea id="wednesday"></textarea>
+    </div>
+
+    <div class="week-day">
+      <h3>Thursday</h3>
+      <textarea id="thursday"></textarea>
+    </div>
+
+    <div class="week-day">
+      <h3>Friday</h3>
+      <textarea id="friday"></textarea>
+    </div>
+
+    <div class="week-day">
+      <h3>Saturday</h3>
+      <textarea id="saturday"></textarea>
+    </div>
+
+    <div class="week-day">
+      <h3>Sunday</h3>
+      <textarea id="sunday"></textarea>
+    </div>
+
+  </div>
+
+  <button onclick="saveWeeklyPlanner()">
+    Save Week
+  </button>
+
+</div>
  }
+  function saveWeeklyPlanner() {
+
+  const weekData = {
+    monday: document.getElementById("monday").value,
+    tuesday: document.getElementById("tuesday").value,
+    wednesday: document.getElementById("wednesday").value,
+    thursday: document.getElementById("thursday").value,
+    friday: document.getElementById("friday").value,
+    saturday: document.getElementById("saturday").value,
+    sunday: document.getElementById("sunday").value
+  };
+
+  localStorage.setItem(
+    "weeklyPlanner",
+    JSON.stringify(weekData)
+  );
+
+}
+
+function loadWeeklyPlanner() {
+
+  const weekData =
+    JSON.parse(
+      localStorage.getItem("weeklyPlanner")
+    ) || {};
+
+  document.getElementById("monday").value =
+    weekData.monday || "";
+
+  document.getElementById("tuesday").value =
+    weekData.tuesday || "";
+
+  document.getElementById("wednesday").value =
+    weekData.wednesday || "";
+
+  document.getElementById("thursday").value =
+    weekData.thursday || "";
+
+  document.getElementById("friday").value =
+    weekData.friday || "";
+
+  document.getElementById("saturday").value =
+    weekData.saturday || "";
+
+  document.getElementById("sunday").value =
+    weekData.sunday || "";
+
+}
 window.onload = function() {
   loadAssignments();
   loadTests();
@@ -1001,6 +1114,7 @@ window.onload = function() {
   updateDashboard();
   updateDueSoon();
   loadCalendar();
+  loadWeeklyPlanner();
 };
 
 </script>
