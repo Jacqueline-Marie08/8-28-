@@ -128,6 +128,17 @@ h3 {
   font-weight: bold;
   color: #4f6b50;
 }
+  .high-priority {
+  border-left: 6px solid red;
+}
+
+.medium-priority {
+  border-left: 6px solid orange;
+}
+
+.low-priority {
+  border-left: 6px solid green;
+}
 </style>
 </head>
 
@@ -393,13 +404,23 @@ function loadAssignments() {
 
   const list =
     document.getElementById("assignmentList");
+let priorityClass = "";
 
+if (item.priority === "High") {
+  priorityClass = "high-priority";
+}
+else if (item.priority === "Medium") {
+  priorityClass = "medium-priority";
+}
+else {
+  priorityClass = "low-priority";
+}
   list.innerHTML = "";
 
   assignments.forEach((item, index) => {
 
     list.innerHTML += `
-      <div class="card">
+      <div class="card ${priorityClass}">
         <strong>${item.name}</strong><br>
         Due: ${item.date}<br>
         Priority: ${item.priority}<br>
