@@ -97,6 +97,15 @@ h2,
 h3 {
   color: #4f6b50;
 }
+  .dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.stat-card {
+  text-align: center;
+}
 </style>
 </head>
 
@@ -121,26 +130,33 @@ h3 {
 <div class="card">
   <h3>Total Assignments</h3>
   <h2 id="assignmentCount">0</h2>
-</div>
+<div class="dashboard-grid">
 
-<div class="card">
-  <h3>Total Tests</h3>
-  <h2 id="testCount">0</h2>
-</div>
+  <div class="card stat-card">
+    <h3>Total Assignments</h3>
+    <h2 id="assignmentCount">0</h2>
+  </div>
 
-<div class="card">
-  <h3>Total Notes</h3>
-  <h2 id="noteCount">0</h2>
-</div>
+  <div class="card stat-card">
+    <h3>Total Tests</h3>
+    <h2 id="testCount">0</h2>
+  </div>
 
-<div class="card">
-  <h3>Total Habits</h3>
-  <h2 id="habitCount">0</h2>
-</div>
+  <div class="card stat-card">
+    <h3>Total Notes</h3>
+    <h2 id="noteCount">0</h2>
+  </div>
 
-<div class="card">
-  <h3>Current GPA</h3>
-  <h2 id="dashboardGPA">0.00</h2>
+  <div class="card stat-card">
+    <h3>Total Habits</h3>
+    <h2 id="habitCount">0</h2>
+  </div>
+
+  <div class="card stat-card">
+    <h3>Current GPA</h3>
+    <h2 id="dashboardGPA">0.00</h2>
+  </div>
+
 </div>
     <h3>GPA Calculator</h3>
 
