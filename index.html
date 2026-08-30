@@ -120,7 +120,10 @@ h3 {
   min-height: 80px;
   padding: 8px;
 }
-
+.today {
+  border: 3px solid #7ea37e;
+  background: #edf5ea;
+}
 .calendar-number {
   font-weight: bold;
   color: #4f6b50;
@@ -296,7 +299,9 @@ h3 {
 </div>
 <div id="calendar" class="card">
 
-  <h2>Monthly Calendar</h2>
+ <h2 id="calendarTitle">
+  Monthly Calendar
+</h2>
 
   <div id="calendarGrid"></div>
 
@@ -878,7 +883,27 @@ function deleteGrade(index) {
 
   const month =
     today.getMonth();
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
 
+document.getElementById(
+  "calendarTitle"
+).innerText =
+  monthNames[month] +
+  " " +
+  year;
   const daysInMonth =
     new Date(
       year,
@@ -887,7 +912,13 @@ function deleteGrade(index) {
     ).getDate();
 
   for (let day = 1; day <= daysInMonth; day++) {
+let isToday = "";
 
+if (
+  day === today.getDate()
+) {
+  isToday = "today";
+}
     let dayHTML = "";
 
     assignments.forEach(item => {
@@ -925,8 +956,7 @@ function deleteGrade(index) {
     });
 
     grid.innerHTML += `
-      <div class="calendar-day">
-
+      <div class="calendar-day ${isToday}">
         <div class="calendar-number">
           ${day}
         </div>
