@@ -1022,10 +1022,11 @@ tests.forEach(test => {
   ) {
 
     dayHTML += `
-      <div style="font-size:12px;color:#8b5cf6;">
-        📝 ${test.name}
-      </div>
-    `;
+  <div style="font-size:12px;">
+    <span style="color:#8b5cf6;">📝</span>
+    ${test.name}
+  </div>
+`;
   }
 
 });
@@ -1035,9 +1036,19 @@ tests.forEach(test => {
         assignmentDate.getFullYear() === year
       ) {
 
-       dayHTML += `
+       let iconColor = "green";
+
+if (item.priority === "High") {
+  iconColor = "red";
+}
+else if (item.priority === "Medium") {
+  iconColor = "orange";
+}
+
+dayHTML += `
   <div style="font-size:12px;">
-    📚 ${item.name}
+    <span style="color:${iconColor};">📚</span>
+    ${item.name}
   </div>
 `;
       }
