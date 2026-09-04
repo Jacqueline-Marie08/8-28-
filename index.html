@@ -275,7 +275,12 @@ h3 {
   <input id="assignmentName" placeholder="Assignment Name">
 
   <input id="assignmentDate" type="date">
-
+<select id="assignmentCourse">
+  <option>Business Law</option>
+  <option>Business Communication</option>
+  <option>Hotel Management & Operations</option>
+  <option>Excel</option>
+</select>
   <select id="assignmentPriority">
     <option>Low</option>
     <option>Medium</option>
@@ -540,6 +545,9 @@ function addAssignment() {
 
   const priority =
     document.getElementById("assignmentPriority").value;
+  
+  const course =
+  document.getElementById("assignmentCourse").value;
 
   if (!name) return;
 
@@ -551,7 +559,8 @@ function addAssignment() {
   assignments.push({
     name,
     date,
-    priority
+    priority,
+    course
   });
 
   localStorage.setItem(
