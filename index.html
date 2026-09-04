@@ -995,8 +995,13 @@ function loadWeeklyPlanner() {
 
       if (!item.date) return;
 
-      const assignmentDate =
-        new Date(item.date);
+     const parts = item.date.split("-");
+
+const assignmentDate = new Date(
+  parts[0],
+  parts[1] - 1,
+  parts[2]
+);
 
       if (
         assignmentDate.getDate() === day &&
