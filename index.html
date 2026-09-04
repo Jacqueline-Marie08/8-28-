@@ -312,7 +312,12 @@ h3 {
   <input id="testName" placeholder="Test Name">
 
   <input id="testDate" type="date">
-
+<select id="testCourse">
+  <option>Business Law</option>
+  <option>Business Communication</option>
+  <option>Hotel Management & Operations</option>
+  <option>Excel</option>
+</select>
   <button onclick="addTest()">
     Add Test
   </button>
@@ -434,7 +439,8 @@ function loadTests() {
     list.innerHTML += `
       <div class="card">
         <strong>${test.name}</strong><br>
-        Test Date: ${test.date}<br>
+Course: ${test.course}<br>
+Test Date: ${test.date}<br>
 
         <button onclick="deleteTest(${index})">
           Delete
@@ -453,7 +459,9 @@ function addTest() {
 
   const date =
     document.getElementById("testDate").value;
-
+  
+const course =
+  document.getElementById("testCourse").value;
   if (!name) return;
 
   const tests =
@@ -461,7 +469,8 @@ function addTest() {
 
   tests.push({
     name: name,
-    date: date
+    date: date,
+    course: course
   });
 
   localStorage.setItem(
