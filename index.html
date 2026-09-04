@@ -1036,19 +1036,19 @@ tests.forEach(test => {
         assignmentDate.getFullYear() === year
       ) {
 
-       let iconColor = "green";
+       let iconColor = "#22c55e";
 
 if (item.priority === "High") {
-  iconColor = "red";
+  iconColor = "#ef4444";
 }
 else if (item.priority === "Medium") {
-  iconColor = "orange";
+  iconColor = "#f59e0b";
 }
 
 dayHTML += `
   <div style="font-size:12px;">
-    <span style="color:${iconColor};">📚</span>
-    ${item.name}
+    <span style="font-weight:bold;color:${iconColor};">●</span>
+    📚 ${item.name}
   </div>
 `;
       }
