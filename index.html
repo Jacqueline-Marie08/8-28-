@@ -199,6 +199,7 @@ h3 {
   <a href="#habits">Habits</a>
   <a href="#calendar">Calendar</a>
   <a href="#weeklyPlanner">Weekly Planner</a>
+  <a href="#importSchedule">Import Schedule</a>
 </div>
 
 <div class="main">
@@ -419,6 +420,23 @@ h3 {
   <button onclick="saveWeeklyPlanner()">
     Save Week
   </button>
+
+</div>
+  <div id="importSchedule" class="card">
+
+  <h2>📥 Import Schedule</h2>
+
+  <input
+    type="file"
+    id="scheduleFile"
+    accept=".pdf,.doc,.docx,.txt"
+  >
+
+  <button onclick="importSchedule()">
+    Import Schedule
+  </button>
+
+  <div id="importStatus"></div>
 
 </div>
 <script>
@@ -1158,6 +1176,21 @@ dayHTML += `
       </div>
     `;
   }
+}
+  function importSchedule() {
+
+  const file =
+    document.getElementById("scheduleFile").files[0];
+
+  if (!file) {
+    alert("Please choose a file.");
+    return;
+  }
+
+  document.getElementById("importStatus").innerHTML =
+    "File selected: " + file.name +
+    "<br><br>Automatic syllabus importing coming soon.";
+
 }
 window.onload = function() {
   loadAssignments();
